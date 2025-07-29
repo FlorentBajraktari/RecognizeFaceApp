@@ -10,7 +10,7 @@ def load_known_faces(image_paths):
     seen = set()
     for path in image_paths:
         if not os.path.exists(path):
-            print(f"\u26a0\ufe0f File not found: {path}")
+            print(f"⚠️ File not found: {path}")
             continue
         image = face_recognition.load_image_file(path)
         face_encs = face_recognition.face_encodings(image)
@@ -23,7 +23,7 @@ def load_known_faces(image_paths):
                     names.append(name)
                     seen.add(name)
         else:
-            print(f"\u26a0\ufe0f No face found in: {path}")
+            print(f"⚠️ No face found in: {path}")
     return encodings, names
 
 def get_image_paths(folder, recursive=False):
