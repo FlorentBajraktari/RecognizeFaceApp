@@ -1,19 +1,18 @@
-# main.py
 from face_engine import start_face_recognition
 
 if __name__ == "__main__":
     print("\n📷 Face Recognition duke u nisur...")
     print("""
-    ℹ️ Taste aktive:
+     Taster aktive:
       [q]  → Dil nga programi
     """)
 
-    # ⚙️ Konfigurimi
-    FOLDER = "known_faces"   # ku i ke fotot e njohura
-    THRESHOLD = 0.45         # ndjeshmëria e njohjes
-    CAMERA_INDEX = 0         # kamera kryesore (0 = default)
-    RESIZE_WIDTH = 800      # ose vendos p.sh. 800 për shpejtësi
-    SAVE_UNKNOWN = True      # ruaj fytyrat e panjohura
+    # Configuration
+    FOLDER = "known_faces"   
+    THRESHOLD = 0.45         
+    CAMERA_INDEX = 0        
+    RESIZE_WIDTH = 800      
+    SAVE_UNKNOWN = True      
 
     start_face_recognition(
         image_folder=FOLDER,
