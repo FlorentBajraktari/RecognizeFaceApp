@@ -1,30 +1,25 @@
 # main.py
-import argparse
 from face_engine import start_face_recognition
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Live face recognition from webcam using known faces.",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
-    )
-    parser.add_argument('--folder', type=str, default='known_faces', help="Folder with known face images.")
-    parser.add_argument('--threshold', type=float, default=0.45, help="Face match threshold.")
-    parser.add_argument('--no-fps', action='store_true', help="Disable FPS display.")
-    parser.add_argument('--show-score', action='store_true', help="Show face match distance score.")
-    parser.add_argument('--camera', type=int, default=0, help="Webcam index (default 0).")
-    parser.add_argument('--recursive', action='store_true', help="Recursively search for images in subfolders.")
-    parser.add_argument('--resize-width', type=int, default=None, help="Resize webcam frame to this width (for high-res cameras).")
-    parser.add_argument('--save-unknown', action='store_true', help="Save unknown faces to disk.")
+    print("\n📷 Face Recognition duke u nisur...")
+    print("""
+    ℹ️ Taste aktive:
+      [q]  → Dil nga programi
+    """)
 
-    args = parser.parse_args()
+    # ⚙️ Konfigurimi
+    FOLDER = "known_faces"   # ku i ke fotot e njohura
+    THRESHOLD = 0.45         # ndjeshmëria e njohjes
+    CAMERA_INDEX = 0         # kamera kryesore (0 = default)
+    RESIZE_WIDTH = 800      # ose vendos p.sh. 800 për shpejtësi
+    SAVE_UNKNOWN = True      # ruaj fytyrat e panjohura
 
     start_face_recognition(
-        image_folder=args.folder,
-        threshold=args.threshold,
-        show_fps=not args.no_fps,
-        show_score=args.show_score,
-        camera_index=args.camera,
-        recursive=args.recursive,
-        resize_width=args.resize_width,
-        save_unknown=args.save_unknown
+        image_folder=FOLDER,
+        threshold=THRESHOLD,
+        camera_index=CAMERA_INDEX,
+        resize_width=RESIZE_WIDTH,
+        save_unknown=SAVE_UNKNOWN
     )
+    print("✅ Duke dalur...")
