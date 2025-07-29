@@ -1,4 +1,3 @@
-# face_engine.py
 import face_recognition
 import cv2
 import os
@@ -12,7 +11,8 @@ from utils import load_known_faces, get_image_paths, draw_label, save_unknown_fa
 MEMORY_FILE = "face_memory.json"
 TEMP_FOLDER = "temp_faces"
 
-# Krijo folderin e përkohshëm nëse nuk ekziston
+# ==========================
+#  Setup
 os.makedirs(TEMP_FOLDER, exist_ok=True)
 
 # ==========================
@@ -136,7 +136,7 @@ def start_face_recognition(
             if not ret:
                 break
 
-            # Rikonfigurim për madhësi
+            # Rikonfigurim për madhësinë
             if resize_width and frame.shape[1] > resize_width:
                 scale = resize_width / frame.shape[1]
                 frame = cv2.resize(frame, (resize_width, int(frame.shape[0] * scale)))
@@ -149,7 +149,7 @@ def start_face_recognition(
                 name = "Unknown"
                 score = None
 
-                # 1️⃣ Kontrollo me fytyrat e njohura
+                # Kontrollo njohjet e njohura
                 if known_encodings:
                     distances = face_recognition.face_distance(known_encodings, encoding)
                     best_index = np.argmin(distances)
@@ -158,7 +158,7 @@ def start_face_recognition(
                         name = known_names[best_index]
                         total_known_faces += 1
 
-                # 2️⃣ Kontrollo memorien nëse ende është "Unknown"
+                # Kontrollo memorien e përkohshme
                 if name == "Unknown":
                     mem_match = match_with_memory(encoding)
                     if mem_match:
@@ -171,12 +171,12 @@ def start_face_recognition(
                             add_to_memory(encoding, face_img)
                             save_unknown_face(frame, top, right, bottom, left, seen_hashes)
 
-                # Vizato etiketa
+                #Vizato kutinë dhe etiketën
                 color = (0, 255, 0) if name != "Unknown" else (0, 0, 255)
                 cv2.rectangle(frame, (left, top), (right, bottom), color, 2)
                 draw_label(frame, name, top, left, right, score, name != "Unknown")
 
-            # FPS llogaritja
+            # Llogaritja e FPS dhe vizatimi i HUD
             curr_time = time.time()
             fps = 1.0 / (curr_time - prev_time)
             fps_queue.append(fps)
